@@ -1,0 +1,188 @@
+{
+  "package_version": "20261021",
+  "packager_version": "1.0.0",
+  "created_utc": "2026-10-21T12:48:13.314690+00:00",
+  "review_status": "automated_checks_passed_manual_review_required",
+  "upstream_component_identifiers": {
+    "release_id": "HeliCraft-0.2.0-20261015",
+    "geometry_engine": "0.2.0",
+    "frontend": "0.2.0",
+    "assistant": "0.2.0",
+    "recorder": "0.2.0",
+    "parameter_rules": "parameters-v2",
+    "sampling": "surface-grid-v2",
+    "build_protocol": "helicraft-build-v2",
+    "session_protocol": "helicraft-modeling-session-v2",
+    "prompt": "helicraft-parameters-v5-multistrand"
+  },
+  "source_code_changed_for_distribution": [
+    {
+      "file": "app.html",
+      "action": "replace_email_input_placeholder"
+    },
+    {
+      "file": "web_opi.py",
+      "line": 26,
+      "field": "SMTP_USER",
+      "action": "read_environment",
+      "environment": "HELICRAFT_SMTP_USER"
+    },
+    {
+      "file": "web_opi.py",
+      "line": 27,
+      "field": "SMTP_PASS",
+      "action": "read_environment",
+      "environment": "HELICRAFT_SMTP_PASS"
+    },
+    {
+      "file": "web_opi.py",
+      "line": 28,
+      "field": "SMTP_HOST",
+      "action": "read_environment",
+      "environment": "HELICRAFT_SMTP_HOST"
+    },
+    {
+      "file": "requirements.txt",
+      "action": "add_declared_import_dependency",
+      "package": "httpx"
+    }
+  ],
+  "omissions": [
+    "deployment credentials",
+    "user databases",
+    "logs",
+    "sessions",
+    "generated models",
+    "backups",
+    "history",
+    "tunnel configuration",
+    "artwork"
+  ],
+  "files": {
+    ".env.example": {
+      "sha256": "d01118392fb50aa7bb7d7cbd3c10a81d28690fe899922bae485aa81378391113",
+      "bytes": 621
+    },
+    ".gitignore": {
+      "sha256": "4de77dfc7011d486ad17685c81696a3df805a002564163a8b66fb39f04eb56df",
+      "bytes": 523
+    },
+    "CONFIGURATION.md": {
+      "sha256": "e212d888069115548ef0ec5dcf92e264d51c8af9d947381ab9caf486c919f86d",
+      "bytes": 2240
+    },
+    "LICENSE": {
+      "sha256": "a03b113533d3ebf101502ecadbe458ae2edf5155f4f8c469a6f689a81883406d",
+      "bytes": 1079
+    },
+    "Main.py": {
+      "sha256": "9e2b5dbc76236a92b2a9d34bc59d6f40587c694d031bd0f3f5d84d8c5c6c6695",
+      "bytes": 8605
+    },
+    "Mod1.py": {
+      "sha256": "4e1eb6c8a1bcd930e7d7ef7be5928f31de89cfd05caf5bc25634f21db8a40400",
+      "bytes": 2165
+    },
+    "Mod2.py": {
+      "sha256": "c052d0ce9288b0a7d243bdaf52aca4022837c30fe1ce6636ab4024bd8f27449c",
+      "bytes": 712
+    },
+    "Mod3.py": {
+      "sha256": "f7300eabe04a38b9c8a1b81b155c21888f31ada56d45c7eba06eb50249148868",
+      "bytes": 4104
+    },
+    "Mod4.py": {
+      "sha256": "4a7acfdd95a196463072c44b7e548599a542d11d719e8ffec6614f0937406b47",
+      "bytes": 2283
+    },
+    "Mod5.py": {
+      "sha256": "5f9b3441744d3f9e74de989857c26298ec4de916be6d9b6384396c8240b1372c",
+      "bytes": 4023
+    },
+    "Mod6.py": {
+      "sha256": "808f38722e070373e62b16f37f8b01bb1b700cb67be47ee5c52d7dbebec13188",
+      "bytes": 6555
+    },
+    "Mod8.py": {
+      "sha256": "ff3219db2ac73df2309a5382a36021acbf2285597af5c5c9f7a1fea6a9a13af2",
+      "bytes": 3535
+    },
+    "Mod9.py": {
+      "sha256": "1d822c9eb7d30195bf4c1ee4fa6e744a5383ebb120f1bfde9a78393c3145e38c",
+      "bytes": 4403
+    },
+    "README.md": {
+      "sha256": "3a595a0f70ec11680a6cfa59210c2b863f70bde2e8b321c783334282ffc3ad58",
+      "bytes": 3554
+    },
+    "app.html": {
+      "sha256": "2db4be8b29f654e5615085049acb576745b9fa712de60ea713245689d7fe7ec7",
+      "bytes": 53311
+    },
+    "cg_templates.py": {
+      "sha256": "25e4d5592bafe7b9a0047d2abda28fc1385dece6d6d46e797b9040d7ddff0094",
+      "bytes": 4673
+    },
+    "config_models.py": {
+      "sha256": "d0d4769901f936702f8b7024039eb3695d3babc8bd3b9339c40cca2a4d09383f",
+      "bytes": 2417
+    },
+    "contact_diagnostics.py": {
+      "sha256": "827123acbb69c9ce0fb3d05605297093f65e7bbe05f639ee13d2cd927c485c7c",
+      "bytes": 2726
+    },
+    "helicraft_assistant/__init__.py": {
+      "sha256": "fc6e57594b33a8e1b4b2a670c2bbdea6f8f4fa24f8cd08203fdc7da5d8701cf6",
+      "bytes": 155
+    },
+    "helicraft_assistant/api.py": {
+      "sha256": "b1d6127ae1b1618b7f4fa8a38451f37619c8eb2a9c24383efe2a9d6dc585e1a7",
+      "bytes": 12485
+    },
+    "helicraft_assistant/assets/assistant.css": {
+      "sha256": "13d8d17e662bbe3782b5b26b0bed33b3e760b1e0137129e758dd900e703261d4",
+      "bytes": 7796
+    },
+    "helicraft_assistant/assets/assistant.js": {
+      "sha256": "2cf21fa75392e6236c0e0f1915cac56e869cdcc23ae3abb6fdc506dddcf2dc08",
+      "bytes": 31415
+    },
+    "helicraft_assistant/assets/session_record.js": {
+      "sha256": "40628052129939c5b58123c8431b3dcea70da8a6139e7c90f39560ac42eca423",
+      "bytes": 28390
+    },
+    "helicraft_assistant/core.py": {
+      "sha256": "55c70b4faaf983a457c242003b4deeaf5d210ec53fed83a173fbc1e4b8999094",
+      "bytes": 17168
+    },
+    "index.html": {
+      "sha256": "27148efc1d913130e067a56ea9f15bb67286341c8b1a1d0169531b253d0e0565",
+      "bytes": 21761
+    },
+    "release_info.py": {
+      "sha256": "a377df563dae15e92b8921d6ca60e23070546d04829785f79d5ba4784680cfe9",
+      "bytes": 381
+    },
+    "requirements.txt": {
+      "sha256": "8c07af7239513cb301214455cdc04a88c5bf0e59842726948f85f9d67d51b487",
+      "bytes": 77
+    },
+    "sampling.py": {
+      "sha256": "87921229b5a49b563a29c92baa7cb184016defdc6008148cd8eda3a3fd81a5e7",
+      "bytes": 3786
+    },
+    "static/README.md": {
+      "sha256": "ef40da4c3cc21216c600e234a2dc6faacead01484f132ae97876cba4289c2e78",
+      "bytes": 485
+    },
+    "validation_rules.py": {
+      "sha256": "b971826105e41a478387b432d5e70b5dc3f40da51eafa283317f6a9542d3a6e7",
+      "bytes": 4103
+    },
+    "web_opi.py": {
+      "sha256": "3179dd4821c22a0944e38581f6dbdff3131bd8e88eb4d688e90470061eb5f58b",
+      "bytes": 12131
+    }
+  },
+  "note": "Hashes describe packaged bytes. The manifest does not assert live-server validation, scientific validation or absence of every possible secret."
+}

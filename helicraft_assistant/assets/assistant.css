@@ -1,0 +1,74 @@
+#hc-assistant, #hc-ai-dock { font-family: Inter, "Microsoft YaHei", system-ui, sans-serif; font-size: 14px; line-height: 1.6; box-sizing: border-box; }
+#hc-assistant *, #hc-ai-dock * { box-sizing: border-box; }
+#hc-ai-dock { position: fixed; right: max(24px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 100001; }
+#hc-ai-dock #hc-ai-launcher { display: block; width: 124px; margin: 0; padding: 0; border: 0; border-radius: 26px; background: transparent; color: #e7f7ff; box-shadow: none; cursor: pointer; font: inherit; -webkit-tap-highlight-color: transparent; }
+#hc-ai-dock .hc-mascot { display: block; width: 124px; height: 143px; filter: drop-shadow(0 7px 9px #02061750); }
+#hc-ai-dock .hc-mascot svg { display: block; width: 100%; height: 100%; overflow: visible; }
+#hc-ai-dock .hc-launcher-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#hc-ai-dock .hc-greeting-card { position: absolute; right: 0; bottom: calc(100% + 10px); width: 248px; max-width: calc(100vw - 32px); padding: 14px 30px 14px 16px; border: 1px solid #5496c88c; border-radius: 16px 16px 4px 16px; background: #102848; color: #edf8ff; box-shadow: 0 10px 32px #02061755; }
+#hc-ai-dock .hc-greeting-card[hidden] { display: none; }
+#hc-ai-dock .hc-greeting-card p { margin: 0; font: 13px/1.7 "Microsoft YaHei", system-ui, sans-serif; }
+#hc-ai-dock .hc-greeting-card button { position: absolute; top: 4px; right: 4px; width: 28px; height: 28px; margin: 0; padding: 0; border: 0; border-radius: 7px; background: transparent; color: #bad7ec; font: 20px system-ui; cursor: pointer; }
+#hc-ai-dock button:focus-visible { outline: 2px solid #93c5fd; outline-offset: 3px; }
+#hc-ai-dock .hc-float { transform-origin: 79px 120px; animation: hc-float 5.5s ease-in-out infinite; }
+#hc-ai-dock .hc-arm-wave { transform-origin: 111px 115px; animation: hc-idle-wave 11s ease-in-out infinite; }
+#hc-ai-dock .hc-eyes { transform-box: fill-box; transform-origin: center; animation: hc-blink 6.8s ease-in-out infinite; }
+#hc-ai-dock .hc-shadow { transform-origin: 79px 174px; animation: hc-shadow 5.5s ease-in-out infinite; }
+#hc-ai-dock.hc-greeting .hc-arm-wave { animation: hc-wave .65s ease-in-out 3; }
+#hc-ai-dock.hc-greeting .hc-greeting-card { animation: hc-pop .3s ease-out both; }
+#hc-ai-dock.hc-suspended * { animation-play-state: paused !important; }
+@keyframes hc-float { 0%, 100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-3px) rotate(.6deg); } }
+@keyframes hc-shadow { 0%, 100% { transform: scaleX(1); opacity: .2; } 50% { transform: scaleX(.9); opacity: .14; } }
+@keyframes hc-blink { 0%, 29%, 33%, 74%, 78%, 82%, 86%, 100% { transform: scaleY(1); } 31%, 76%, 84% { transform: scaleY(.12); } }
+@keyframes hc-idle-wave { 0%, 8%, 30%, 100% { transform: rotate(0); } 12%, 20% { transform: rotate(13deg); } 16%, 24% { transform: rotate(-7deg); } }
+@keyframes hc-wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(16deg); } }
+@keyframes hc-pop { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  #hc-ai-dock *, #hc-ai-dock.hc-greeting * { animation: none !important; transition: none !important; }
+}
+#hc-assistant { position: fixed; right: 24px; bottom: 188px; z-index: 100002; width: 430px; max-width: calc(100vw - 32px); height: min(700px, calc(100dvh - 214px)); display: flex; flex-direction: column; background: #0f172a; color: #e2e8f0; border: 1px solid #334155; border-radius: 18px; box-shadow: 0 24px 80px #020617b3; overflow: hidden; }
+#hc-assistant[hidden] { display: none; }
+#hc-assistant button, #hc-assistant a { font: inherit; }
+#hc-assistant button { width: auto; margin: 0; padding: 7px 11px; border: 1px solid #475569; border-radius: 8px; background: #1e293b; color: #e2e8f0; cursor: pointer; box-shadow: none; }
+#hc-assistant button:hover:not(:disabled) { border-color: #93c5fd; background: #263753; }
+#hc-assistant button:disabled { opacity: .5; cursor: not-allowed; }
+#hc-assistant :focus-visible, #hc-ai-launcher:focus-visible { outline: 2px solid #93c5fd; outline-offset: 3px; }
+#hc-assistant .hc-head { padding: 17px 18px 12px; display: flex; gap: 10px; justify-content: space-between; border-bottom: 1px solid #334155; }
+#hc-assistant .hc-head strong { display: block; font-size: 16px; color: #f8fafc; }
+#hc-assistant .hc-head small { display: block; color: #94a3b8; font-size: 11px; letter-spacing: .2px; }
+#hc-assistant .hc-actions { display: flex; align-items: center; gap: 5px; }
+#hc-assistant .hc-actions button { padding: 4px 8px; background: transparent; }
+#hc-assistant .hc-context { margin: 0; padding: 9px 18px; color: #bfdbfe; background: #172641; font-size: 12px; }
+#hc-assistant .hc-log { flex: 1; overflow-y: auto; padding: 16px; min-height: 0; overscroll-behavior: contain; }
+#hc-assistant .hc-message { margin: 0 0 14px; padding: 12px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 12px 12px 12px 3px; overflow-wrap: anywhere; }
+#hc-assistant .hc-message.hc-user { background: #183465; border-color: #2b4c80; border-radius: 12px 12px 3px 12px; margin-left: 32px; }
+#hc-assistant .hc-message p { margin: 0; white-space: pre-wrap; font-size: 13px; }
+#hc-assistant .hc-speaker { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 5px; }
+#hc-assistant .hc-examples { display: flex; flex-wrap: wrap; gap: 7px; margin: 10px 0 15px; }
+#hc-assistant .hc-examples button { font-size: 12px; text-align: left; padding: 6px 10px; border-radius: 14px; }
+#hc-assistant .hc-plan { padding-top: 11px; margin-top: 12px; border-top: 1px solid #475569; }
+#hc-assistant .hc-plan strong { color: #bfdbfe; font-size: 12px; }
+#hc-assistant .hc-change { padding: 8px 0; border-bottom: 1px solid #334155; }
+#hc-assistant .hc-change b { display: block; font-size: 12px; color: #f1f5f9; }
+#hc-assistant .hc-change span, #hc-assistant .hc-change small { display: block; font-size: 12px; }
+#hc-assistant .hc-change small { color: #a5b4fc; }
+#hc-assistant .hc-plan ul { padding-left: 18px; margin: 10px 0; font-size: 12px; }
+#hc-assistant .hc-plan details { margin: 9px 0; color: #94a3b8; font-size: 11px; }
+#hc-assistant .hc-plan .hc-primary, #hc-assistant .hc-compose .hc-primary { background: #2563eb; border-color: #3b82f6; color: #fff; }
+#hc-assistant .hc-plan .hc-primary { width: 100%; margin-top: 10px; }
+#hc-assistant a { color: #93c5fd; text-decoration: underline; }
+#hc-assistant .hc-compose { padding: 12px 16px 14px; border-top: 1px solid #334155; }
+#hc-assistant .hc-status { color: #cbd5e1; font-size: 12px; min-height: 19px; margin: 0 0 7px; }
+#hc-assistant textarea { width: 100%; min-height: 76px; max-height: 150px; resize: vertical; padding: 10px 12px; border: 1px solid #475569; border-radius: 9px; color: #f8fafc; background: #020617; font: inherit; font-size: 13px; line-height: 1.5; }
+#hc-assistant .hc-compose-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 9px; }
+#hc-assistant .hc-compose-row small { color: #94a3b8; font-size: 11px; }
+#hc-assistant .hc-export { margin-right: auto; font-size: 11px; }
+@media (max-width: 600px) {
+  #hc-assistant { right: 12px; bottom: 164px; width: calc(100vw - 24px); max-width: none; height: calc(100dvh - 186px); }
+  #hc-ai-dock { right: 14px; bottom: max(16px, env(safe-area-inset-bottom)); }
+  #hc-ai-dock #hc-ai-launcher { width: 100px; }
+  #hc-ai-dock .hc-mascot { width: 100px; height: 115px; }
+}
+
+#hc-ai-dock .hc-login-link { display: inline-block; margin-top: 9px; color: #a7d7ff; font-size: 13px; font-weight: 600; text-decoration: underline; }
+#hc-ai-dock .hc-login-link[hidden] { display: none; }

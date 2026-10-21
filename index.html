@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" class="hc-home">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HeliCraft | Supramolecular Assembly Platform</title>
+    <link rel="preload" href="/static/logo-HeliCraft-White.webp" as="image" type="image/webp">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================= */
+        /* 全局变量与基础样式 */
+        /* ========================================= */
+        :root {
+            --bg-deep: #020617; --text-main: #f8fafc; --text-muted: #94a3b8;
+            --primary: #3b82f6; --border-color: rgba(255, 255, 255, 0.08);
+            --layout-width: 88%; --layout-max: 1380px;
+        }
+
+        body { 
+            font-family: 'Inter', system-ui, sans-serif; margin: 0; 
+            background: radial-gradient(circle at top center, #1e293b 0%, #0b1121 100%); 
+            color: white; overflow-x: hidden; overflow-y: auto;
+        }
+        .brand-font { font-family: 'Space Grotesk', sans-serif; }
+
+        /* ========================================= */
+        /* 🧭 1. 绝对居中的导航栏 */
+        /* ========================================= */
+        nav {
+            display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+            padding: 0 48px; height: 85px; background: rgba(11, 17, 33, 0.8); 
+            backdrop-filter: blur(12px); position: sticky; top: 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); z-index: 1000;
+        }
+        .nav-left { justify-self: start; display: flex; align-items: center; gap: 12px; }
+        .nav-center { justify-self: center; display: flex; gap: 32px; font-size: 0.85rem; font-weight: 600; color: #94a3b8; }
+        .nav-center a { color: inherit; text-decoration: none; transition: 0.2s; }
+        .nav-center a:hover { color: white; }
+        .nav-right { justify-self: end; }
+
+        /* ========================================= */
+        /* 🚀 首屏样式 */
+        /* ========================================= */
+        .hero-container {
+            display: flex; align-items: center; justify-content: space-between; 
+            min-height: 80vh; padding: 0 8%; max-width: 1400px; margin: 0 auto; gap: 5%;
+        }
+        .btn-primary {
+            background: #2563eb; color: white; border: none; padding: 16px 36px; 
+            border-radius: 12px; font-weight: 900; font-size: 1rem; cursor: pointer; 
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4); transition: 0.2s;
+        }
+        .btn-primary:hover { background: #1d4ed8; }
+        .btn-secondary {
+            background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); 
+            padding: 16px 36px; border-radius: 12px; font-weight: 700; font-size: 1rem; 
+            cursor: pointer; transition: 0.2s;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+        /* ========================================= */
+        /* 🎓 2. 滚动高校荣誉墙 */
+        /* ========================================= */
+        .uni-wall-section { text-align: center; margin: 40px auto 100px; width: var(--layout-width); max-width: var(--layout-max); }
+        .uni-wall-title { font-size: 0.9rem; color: #475569; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 30px; }
+        .uni-wall-container { border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 22px 0; overflow: hidden; position: relative; }
+        .uni-wall-container::before, .uni-wall-container::after { content: ''; position: absolute; width: 150px; height: 100%; top: 0; z-index: 2; pointer-events: none;}
+        .uni-wall-container::before { left: 0; background: linear-gradient(to right, #0b1121, transparent); }
+        .uni-wall-container::after { right: 0; background: linear-gradient(to left, #0b1121, transparent); }
+        .uni-wall-track { display: flex; width: max-content; animation: scrollLeft 32s linear infinite; }
+        .uni-wall-track:hover { animation-play-state: paused; }
+        .uni-item { padding: 0 12px; display: flex; align-items: center; justify-content: center;}
+        .uni-logo-img { height: 120px; object-fit: contain; filter: grayscale(100%) opacity(40%); transition: 0.4s; cursor: pointer; }
+        .uni-logo-img:hover { filter: grayscale(0%) opacity(100%); transform: scale(1.05); }
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ========================================= */
+        /* 🧩 3. 模块化展示区域 (Capabilities & Collab) */
+        /* ========================================= */
+        .section-container { width: var(--layout-width); max-width: var(--layout-max); margin: 0 auto 120px; }
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; }
+        .section-title span { color: var(--primary); }
+        
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: rgba(11, 17, 33, 0.6); border: 1px solid var(--border-color); padding: 35px; border-radius: 20px; transition: 0.3s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .card h3 { font-size: 1.4rem; margin: 0 0 15px; }
+        .card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 25px; font-size: 1rem; }
+        .tag-credits { background: rgba(59, 130, 246, 0.1); color: var(--primary); padding: 5px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: bold; }
+
+        /* ========================================= */
+        /* 🛑 4. 完整页脚 (Footer) */
+        /* ========================================= */
+        footer { border-top: 1px solid var(--border-color); padding: 80px 0 40px; margin-top: 100px; background: rgba(2, 6, 23, 0.5); }
+        .footer-content { width: var(--layout-width); max-width: var(--layout-max); margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 60px; }
+        .footer-brand h2 { font-size: 2rem; margin: 0 0 15px; color: white;}
+        .footer-brand p { color: #64748b; max-width: 350px; font-size: 1rem; line-height: 1.6;}
+        .footer-links { display: flex; gap: 80px; }
+        .link-group h4 { margin-bottom: 20px; font-size: 1.1rem; color: white;}
+        .link-group a { display: block; color: #64748b; margin-bottom: 12px; font-size: 1rem; }
+        .link-group a:hover { color: white; }
+        .footer-bottom { width: var(--layout-width); max-width: var(--layout-max); margin: 40px auto 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; color: #475569; font-size: 0.9rem; }
+    </style>
+<style id="hc-updates-style">
+#updates { scroll-margin-top: 112px; }
+#updates * { box-sizing: border-box; }
+#updates .hc-updates-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 30px; }
+#updates .hc-updates-eyebrow { margin: 0 0 12px; color: #67c9ff; font-size: 11px; font-weight: 700; letter-spacing: .18em; }
+#updates h2 { margin: 0; color: #f8fafc; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.15; letter-spacing: -.035em; }
+#updates h2 span { color: #94a3b8; }
+#updates .hc-updates-intro { margin: 14px 0 0; color: #94a3b8; font-size: 15px; line-height: 1.7; }
+#updates .hc-updates-stamp { margin: 0 0 3px; color: #94a3b8; font-size: 12px; white-space: nowrap; }
+#updates .hc-updates-stamp time { display: block; margin-top: 5px; color: #cbd5e1; font-variant-numeric: tabular-nums; }
+#updates .hc-updates-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 24px; }
+#updates .hc-release-panel, #updates .hc-todo-panel { min-width: 0; padding: 28px; border: 1px solid #2b3a50; border-radius: 18px; background: #0b1425cc; }
+#updates .hc-panel-title { margin: 0; color: #f8fafc; font-size: 17px; font-weight: 650; }
+#updates .hc-release-list { list-style: none; margin: 26px 0 0; padding: 0; }
+#updates .hc-release { position: relative; margin-left: 5px; padding: 0 0 30px 24px; border-left: 1px solid #334155; }
+#updates .hc-release:last-child { padding-bottom: 0; }
+#updates .hc-release::before { content: ''; position: absolute; left: -5px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: #64748b; box-shadow: 0 0 0 5px #0d1728; }
+#updates .hc-release-latest::before { background: #38bdf8; }
+#updates .hc-release-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; color: #94a3b8; font-size: 11px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+#updates .hc-release-version { padding: 2px 7px; border: 1px solid #334155; border-radius: 5px; color: #cbd5e1; }
+#updates .hc-release-badge { color: #7dd3fc; }
+#updates .hc-release h4 { margin: 12px 0 10px; color: #f1f5f9; font-size: 17px; line-height: 1.5; }
+#updates .hc-release ul { margin: 0; padding-left: 17px; color: #a8b6c9; font-size: 13px; line-height: 1.8; }
+#updates .hc-release ul li + li { margin-top: 4px; }
+#updates .hc-todo-panel { background: linear-gradient(155deg, #142138dd, #0b1425dd); }
+#updates .hc-todo-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+#updates .hc-todo-status { padding: 4px 9px; border: 1px solid #435473; border-radius: 99px; color: #bdc9e2; font-size: 10px; font-weight: 600; }
+#updates .hc-todo-intro { margin: 12px 0 22px; color: #94a3b8; font-size: 12px; line-height: 1.7; }
+#updates .hc-todo-list { list-style: none; margin: 0; padding: 0; }
+#updates .hc-todo-list > li { display: flex; gap: 13px; padding: 18px 0; border-top: 1px solid #2b3a50; }
+#updates .hc-todo-mark { flex: 0 0 14px; height: 14px; margin-top: 4px; border: 1px solid #6e86a9; border-radius: 4px; }
+#updates .hc-todo-list h4 { margin: 0 0 7px; color: #e2e8f0; font-size: 14px; line-height: 1.5; }
+#updates .hc-todo-list p { margin: 0; color: #a8b6c9; font-size: 12px; line-height: 1.8; }
+#updates .hc-todo-note { margin: 15px 0 0; color: #94a3b8; font-size: 11px; }
+@media (max-width: 800px) {
+    #updates .hc-updates-grid { grid-template-columns: minmax(0, 1fr); }
+    #updates .hc-updates-heading { align-items: flex-start; flex-direction: column; gap: 16px; }
+    #updates .hc-updates-stamp time { display: inline; margin-left: 8px; }
+}
+@media (max-width: 440px) {
+    #updates .hc-release-panel, #updates .hc-todo-panel { padding: 20px 16px; }
+    #updates .hc-release { padding-left: 18px; }
+}
+</style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <img src="/static/logo-HeliCraft-White.webp" alt="HeliCraft Logo" style="height: 32px;" onerror="this.style.display='none'">
+            <span style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.02em;"> HeliCraft </span>
+        </div>
+        <div class="nav-center brand-font">
+            <a href="#" style="color: white;">Home</a>
+            <a href="#about">About</a>
+            <a href="#gallery">Results Gallery</a>
+            <a href="#updates">Updates</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-right">
+            <button onclick="window.location.href='/app.html'" class="btn-primary brand-font" style="padding: 10px 25px; font-size: 0.95rem; border-radius: 8px;">Get Started</button>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <div style="flex: 0 0 40%; display: flex; justify-content: center; align-items: center;">
+            <img src="/static/logo-HeliCraft-White.webp" alt="HeliCraft Big Logo" style="width: 100%; max-width: 550px; height: auto; filter: drop-shadow(0 0 80px rgba(56,189,248,0.3));" onerror="this.style.display='none'">
+        </div>
+        <div style="flex: 0 0 55%; display: flex; flex-direction: column; align-items: flex-start; text-align: left;">
+            <div style="display: inline-block; padding: 8px 16px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 50px; color: #38bdf8; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 24px;">
+                🚀 ALPHA ENGINE V1.2 IS LIVE
+            </div>
+            <h1 style="font-weight: 900; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.04em; margin-top: 0;">
+                <span style="display: block; font-size: 7.2rem;">HeliCraft</span>
+                <span style="display: block; font-size: 2.8rem; margin-top: 8px;">
+                    <span style="color: transparent; -webkit-text-stroke: 1px #38bdf8; text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);">Controlled Geometry</span> for Molecular Assembly
+                </span>
+            </h1>
+            <p style="color: #94a3b8; font-size: 1.2rem; max-width: 700px; line-height: 1.6; margin-bottom: 40px;">
+                Build helical and ribbon assemblies from molecular building blocks. Set geometry and orientation, inspect the result, and discuss parameters with an AI assistant.
+            </p>
+            <div style="display: flex; gap: 16px;">
+                <button onclick="window.location.href='/app.html'" class="btn-primary">Get Started!</button>
+                <!-- HELICRAFT_UI_V0151: empty Quick start removed -->
+            </div>
+        </div>
+    </div>
+
+    <section class="uni-wall-section">
+        <h3 class="uni-wall-title brand-font">BUILT FOR ACADEMIC RESEARCH</h3>
+        <div class="uni-wall-container">
+            <div class="uni-wall-track" id="logo-track">
+                </div>
+        </div>
+    </section>
+
+    <div class="section-container" id="capabilities">
+        <h2 class="section-title brand-font"><span>></span> Core Capabilities</h2>
+        <div class="grid-cards">
+            <div class="card">
+                <h3 class="brand-font">Geometry Topology</h3>
+                <p>Explore cylindrical and conical helices, Archimedean and Fibonacci spirals, and flat or twisted ribbons with explicit geometric parameters.</p>
+                <span class="tag-credits">✨ FREE</span>
+            </div>
+            <div class="card">
+                <h3 class="brand-font">AI Parameter Assistant</h3>
+                <p>Describe your modeling goal, clarify parameters, and review suggested changes before applying them to the form.</p>
+                <span class="tag-credits">You review every change</span>
+            </div>
+            <div class="card">
+                <h3 class="brand-font">Inspect Your Assembly</h3>
+                <p>Compare the geometric preview with the assembled molecular structure in the browser.</p>
+                <span class="tag-credits">Interactive 3D</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-container" id="collaboration">
+        <h2 class="section-title brand-font">Your Modeling <span>Workflow</span></h2>
+        <div class="grid-cards">
+            <div class="card">
+                <h3 class="brand-font">Compare Parameters</h3>
+                <p>Vary pitch, radius, handedness, and monomer orientation to construct structural hypotheses for subsequent analysis.</p>
+            </div>
+            <div class="card">
+                <h3 class="brand-font">Keep a Modeling Record</h3>
+                <p>Export the assistant conversation and current parameters as a JSON record. Keep the original monomer file alongside it.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HELICRAFT_UPDATES_START: maintain dated entries and planned tasks here -->
+<section class="section-container" id="updates" aria-labelledby="hc-updates-title">
+    <div class="hc-updates-heading">
+        <div>
+            <p class="hc-updates-eyebrow">THE PLATFORM, IN PROGRESS</p>
+            <h2 class="brand-font" id="hc-updates-title">Updates <span>&amp; Roadmap</span></h2>
+            <p class="hc-updates-intro">Recent improvements and what we plan to work on next.</p>
+        </div>
+        <p class="hc-updates-stamp">Last updated <time datetime="2026-09-29">2026-09-29</time></p>
+    </div>
+    <div class="hc-updates-grid">
+        <div class="hc-release-panel">
+            <h3 class="hc-panel-title">Release notes</h3>
+            <ol class="hc-release-list">
+                <li class="hc-release hc-release-latest">
+                    <div class="hc-release-meta"><time datetime="2026-09-29">2026-09-29</time><span class="hc-release-version">0.1.5.1</span><span class="hc-release-badge">Latest</span></div>
+                    <h4>Meet Jack. A clearer workspace.</h4>
+                    <ul>
+                        <li>Named the animated modeling assistant Jack.</li>
+                        <li>Made the file-upload control display English consistently.</li>
+                        <li>Removed the empty Quick start entry and added this updates board.</li>
+                    </ul>
+                </li>
+                <li class="hc-release">
+                    <div class="hc-release-meta"><time datetime="2026-09-29">2026-09-29</time><span class="hc-release-version">0.1.5</span></div>
+                    <h4>An animated assistant for modeling</h4>
+                    <ul>
+                        <li>Added the cartoon companion with blinking and waving.</li>
+                        <li>Connected parameter guidance to the workspace after login.</li>
+                        <li>Kept suggested parameter changes subject to user confirmation.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <aside class="hc-todo-panel" aria-labelledby="hc-todo-title">
+            <div class="hc-todo-heading"><h3 class="hc-panel-title" id="hc-todo-title">ToDo List</h3><span class="hc-todo-status">Planned</span></div>
+            <p class="hc-todo-intro">Next improvements. Priorities may change.</p>
+            <ul class="hc-todo-list">
+                <li><span class="hc-todo-mark" aria-hidden="true"></span><div><h4>Guided modeling tutorial</h4><p>Walk through monomer selection, orientation, geometry and parameter review.</p></div></li>
+                <li><span class="hc-todo-mark" aria-hidden="true"></span><div><h4>Reproducible example systems</h4><p>Small reference cases with input files, parameter recipes and validation notes.</p></div></li>
+                <li><span class="hc-todo-mark" aria-hidden="true"></span><div><h4>Mobile workspace improvements</h4><p>Improve form layout and 3D viewing on smaller screens.</p></div></li>
+            </ul>
+            <p class="hc-todo-note">Planned items are not yet available.</p>
+        </aside>
+    </div>
+</section>
+<!-- HELICRAFT_UPDATES_END -->
+
+<div class="section-container" id="about">
+        <h2 class="section-title brand-font">About HeliCraft</h2>
+        <p style="font-size: 1.2rem; color: #94a3b8; max-width: 900px; line-height: 1.8;">
+            HeliCraft is a geometry-based platform for constructing supramolecular assemblies. Its AI assistant helps interpret inputs and propose parameter changes. Molecular stability and self-assembly behavior require independent physical validation.
+        </p>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2 class="brand-font">HeliCraft</h2>
+                <p>From molecular building blocks to controlled assembly geometry.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group brand-font">
+                    <h4>Platform</h4>
+                    <a href="#capabilities">Capabilities</a>
+                    <a href="#collaboration">Collaboration</a>
+                </div>
+                <div class="link-group brand-font">
+                    <h4>Company</h4>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 HeliCraft Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 这里使用了 App.jsx 里校徽
+            const logos = [
+                "/static/logo-scut.jpg", "/static/logo-hku.png", "/static/logo-fdu.webp", "/static/logo-ustc.svg", "/static/logo-pku.webp",
+                "/static/logo-sjtu.png", "/static/logo-nju.png", "/static/logo-zju.png", "/static/logo-tsinghua.webp",
+                "/static/logo-szbl.png", "/static/logo-sysu.png", "/static/logo-cuhk.png"
+            ];
+            
+            const track = document.getElementById('logo-track');
+            
+            // 无缝循环
+            const renderLogos = [...logos, ...logos].map(src => `
+                <div class="uni-item">
+                    <img src="${src}" class="uni-logo-img" alt="University Logo" 
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'120\\' height=\\'40\\' viewBox=\\'0 0 120 40\\'%3E%3Crect width=\\'120\\' height=\\'40\\' fill=\\'%231e293b\\' rx=\\'8\\'/%3E%3Ctext x=\\'50%25\\' y=\\'50%25\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' fill=\\'%23475569\\' font-size=\\'14\\' font-family=\\'sans-serif\\'%3ELOGO%3C/text%3E%3C/svg%3E';">
+                </div>
+            `).join('');
+            
+            track.innerHTML = renderLogos;
+        });
+    </script>
+<!-- HELICRAFT_ASSISTANT_V1 -->
+    <link rel="stylesheet" href="/assistant-assets/assistant.css?v=0.1.5">
+    <script src="/assistant-assets/assistant.js?v=0.1.5.5" defer></script>
+</body>
+</html>

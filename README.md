@@ -1,73 +1,72 @@
-**************************************************************************************************************************
-HeliCraft is a Python tool for generating and arranging molecular structures along various types of helical paths, such as 
-cylindrical, conical, Archimedean, Fibonacci, and golden spirals. It reads atomic coordinates from an XYZ file, places the 
-structures on a helical surface, and applies transformations to align them with the spiral's geometry. The output is saved 
-as XYZ files for visualization or further analysis.
+# HeliCraft
 
-** Features **
-1) Supports multiple spiral types: cylindrical, conical, Archimedean, Fibonacci, and golden spirals, with left- or right-
-   handed chirality;
-3) Generates grid points on the spiral surface for structure placement;
-4) Aligns molecular structures using reference points and vectors, with options for normal vector orientation (perpendicu-
-   lar or parallel to the helical axis);
-6) Validates transformations to ensure interatomic distances are preserved;
-7) Saves transformed structures as individual frames or a combined XYZ file;
-8) Provides debugging information through a structure info file.
+HeliCraft constructs helical and ribbon molecular arrangements from a user-supplied
+XYZ template. Users specify a scaffold and the placement of rigid template copies,
+inspect the resulting coordinates, and export an initial arrangement for subsequent
+analysis or simulation preparation.
 
-** Prerequisites **
-1) Python 3.6+
-2) numpy
-3) pandas
-4) scipy
+- Hosted workspace: <https://www.helicraft-lab.cn/>
+- Source repository: <https://github.com/GraceJunhao/HeliCraft>
+- Source license: [MIT](LICENSE)
 
-** Install dependencies using **
-   pip install numpy pandas scipy
+## Construction workflow
 
-** Installation **
-   Clone the repository:
-   git clone https://github.com/GraceJunhao/HeliCraft.git
-   cd HeliCraft
+1. Supply an XYZ template and select reference sites A and B using zero-based indices.
+2. Choose a cylindrical, conical, Archimedean, exponentially expanding, flat-ribbon,
+   or twisted-ribbon scaffold and set its dimensions and sampling parameters.
+3. Set winding direction where applicable, local insertion angle, and supported
+   multi-strand controls. Flat scaffolds do not acquire handedness from a winding selector.
+4. Build the coordinates. The browser uses XYZ for molecular preview and offers
+   coordinate exports including XYZ, PDB and mmCIF, with construction metadata.
 
-Ensure all required Python modules (Main.py, Mod1.py, Mod2.py, Mod3.py, Mod4.py, Mod5.py, Mod6.py, Mod7.py) are in the 
-same directory.
+Jack provides an additional route for explaining controls and proposing form changes.
+The user reviews and accepts a proposal before a separate Build action constructs
+coordinates. The model service uses operator-supplied credentials; no credentials or
+account data from the hosted service are included in this distribution.
 
-** Usage **
-1) Prepare an XYZ file:
-   Create an XYZ file containing the atomic coordinates of the molecular structure to be placed on the spiral. The file
-   should follow the standard XYZ format:
-                      <number of atoms>
-                      <comment line>
-                      <symbol> <x> <y> <z>
-                      ...
-3) Run the program:
-   python Main.py
-4) Follow the prompts:
-   3.1) Select a spiral type (e.g., right-handed cylindrical spiral);
-   3.2) Enter spiral parameters (e.g., radius, pitch, number of turns, bandwidth, grid size);
-   3.3) Choose the orientation of the spiral's normal vector (perpendicular or parallel to the helical axis);
-   3.4) Provide the path to the XYZ file;
-   3.5) Select two atoms to define the reference vector for alignment;
-   3.6) Specify output filenames for the frame-by-frame and combined XYZ files (default: PRO_frame.xyz and PRO_all.xyz).
-5) Outputs:
-   5.1) spiral_points.csv: Grid points generated on the spiral surface;
-   5.2) <output_file_frame>.xyz: Frame-by-frame XYZ file for animation or analysis;
-   5.3) <output_file_all>.xyz: Combined XYZ file containing all transformed structures;
-   5.4) structure_info.txt: Debugging file with structure information.
+## Scope
 
-** Notes **
-1) The program assumes the spiral axis is along the z-axis;
-2) Grid points are uniformly distributed on the spiral surface, with the number of structures determined by the surface area
-   and grid size;
-3) Chirality (left- or right-handed) affects the spiral's rotation direction;
-4) The transformation ensures that interatomic distances are preserved, with validation performed automatically.
+The same placement engine can use all-atom or coarse-grained templates. It preserves
+the supplied internal conformation through rigid placement. Contact diagnostics help
+inspect initial arrangements but do not establish physical stability. The sampling
+interval L is not a collision threshold. Molecular interactions, force-field assignment,
+relaxation and simulation remain separate preparation and analysis steps.
 
-** License **
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Local installation
 
-** Citation **
-The original paper on HeliCraft is currently under submission. 
-If you use HeliCraft in your research, please cite the original paper once it is published. 
-Thank you very much!!!
+Use an isolated Python environment. The deployment used Python 3.8; the dependency
+file lists required packages rather than an exact environment lock. Validate a fresh
+installation on the Python version you intend to use.
 
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
+cp .env.example .env
+```
 
+Fill in your own SMTP settings and a fresh session secret in `.env`. Jack additionally
+requires a provider key and model identifier. See [configuration instructions](CONFIGURATION.md).
 
+```sh
+python -m uvicorn web_opi:app --host 127.0.0.1 --port 8081 --env-file .env
+```
+
+Run this command from the extracted HeliCraft directory. The service creates its own
+local user database; the hosted service's database is not distributed. The email-login
+workflow needs a functioning SMTP configuration. Local startup does not reproduce a
+production deployment with HTTPS, a reverse proxy, backups and process supervision.
+
+## Release provenance
+
+`release_info.py` contains component identifiers. `SOURCE_MANIFEST.json` records the
+distribution label, the files actually packaged, their SHA256 values, and configuration
+changes made only in the release copy. A packaging date does not imply a new geometry
+engine version or renewed performance measurements.
+
+This source-only snapshot excludes production configuration, user information, private
+session records, generated molecular files, historical patches and artwork. Research
+templates, figure coordinates and benchmark records should be deposited separately
+with their own provenance and permissions. No persistent archive DOI is asserted here.
+
+Dependencies and any separately obtained third-party assets retain their own licenses.
