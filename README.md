@@ -1,4 +1,5 @@
 # HeliCraft
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23552339.svg)](https://doi.org/10.5281/zenodo.23552339)
 
 HeliCraft constructs helical and ribbon molecular arrangements from a user-supplied
 XYZ template. Users specify a scaffold and the placement of rigid template copies,
