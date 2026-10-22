@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Dai"
+    given-names: "Junhao"
+    orcid: "https://orcid.org/0000-0003-2413-5885"
+title: "HeliCraft"
+version: v2026.10.22
+doi: 10.5281/zenodo.23552339
+date-released: 2026-10-22
+url: "https://github.com/GraceJunhao/HeliCraft"
+license: MIT
